@@ -15,8 +15,13 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 xml_output_location = os.path.join(dir_path, "topologies")
 
+png_output_location = os.path.join(dir_path, "png_files")
+
 if not os.path.isdir(xml_output_location):
     pathlib.Path(xml_output_location).mkdir(parents=True, exist_ok=True)
+
+if not os.path.isdir(png_output_location):
+    pathlib.Path(png_output_location).mkdir(parents=True, exist_ok=True)    
 
 for graphs in range(topology_number):
 
@@ -76,6 +81,6 @@ for graphs in range(topology_number):
 
     pos = graphviz_layout(G, prog="dot")
     nx.draw(G, pos, with_labels=True)
-    plt.savefig("DAG_" + str(graphs + 1) + ".png")
+    plt.savefig(os.path.join(png_output_location, "DAG_" + str(graphs + 1) + ".png"))
     plt.clf()
 
